@@ -16,3 +16,5 @@ License
 Ethereum Classic Desktop is released under the terms of the Apache License 2.0 license.
 See https://github.com/HebePlatform/etcdesktop/blob/main/LICENSE.
 
+Contributor：
+@d_a:https://github.com/HebePlatform/etcdesktop/tree/main/etcdesktop/public/icons,https://twitter.com/etc_698467

@@ -19,4 +19,4 @@ See https://github.com/HebePlatform/etcdesktop/blob/main/LICENSE.
 Community Contributor：
 ---------------------
 
-@d_a:https://twitter.com/etc_698467 -> https://github.com/HebePlatform/etcdesktop/tree/main/etcdesktop/public/icons 
+[@d_a](https://twitter.com/etc_698467):  https://github.com/HebePlatform/etcdesktop/tree/main/etcdesktop/public/icons 

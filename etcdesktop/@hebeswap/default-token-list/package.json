@@ -1,0 +1,70 @@
+{
+  "_args": [
+    [
+      "@uniswap/default-token-list@1.5.0",
+      "/Users/zhanghuasheng/Documents/hebeswap"
+    ]
+  ],
+  "_development": true,
+  "_from": "@uniswap/default-token-list@1.5.0",
+  "_id": "@uniswap/default-token-list@1.5.0",
+  "_inBundle": false,
+  "_integrity": "sha512-TF5U+9ED6N+qrJKfoocci2vJ0u/57cxeUrnoDazqzLnGcoAp9FVMyi+n0ebz6Ka1AqFCIXkHGwQy+8GVQFTQdw==",
+  "_location": "/@uniswap/default-token-list",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "@uniswap/default-token-list@1.5.0",
+    "name": "@uniswap/default-token-list",
+    "escapedName": "@uniswap%2fdefault-token-list",
+    "scope": "@uniswap",
+    "rawSpec": "1.5.0",
+    "saveSpec": null,
+    "fetchSpec": "1.5.0"
+  },
+  "_requiredBy": [
+    "#DEV:/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@uniswap/default-token-list/-/default-token-list-1.5.0.tgz",
+  "_spec": "1.5.0",
+  "_where": "/Users/zhanghuasheng/Documents/hebeswap",
+  "author": {
+    "name": "Moody Salem"
+  },
+  "bugs": {
+    "url": "https://github.com/Uniswap/default-token-list/issues"
+  },
+  "description": "◦ The Uniswap default token list",
+  "devDependencies": {
+    "@ethersproject/address": "^5.0.2",
+    "@uniswap/token-lists": "^1.0.0-beta.8",
+    "ajv": "^6.12.3",
+    "chai": "^4.2.0",
+    "mocha": "^8.0.1",
+    "rimraf": "^3.0.2"
+  },
+  "files": [
+    "build/uniswap-default.tokenlist.json"
+  ],
+  "homepage": "https://github.com/Uniswap/default-token-list#readme",
+  "keywords": [
+    "uniswap",
+    "default",
+    "token",
+    "list"
+  ],
+  "license": "GPL-3.0-or-later",
+  "main": "build/uniswap-default.tokenlist.json",
+  "name": "@uniswap/default-token-list",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Uniswap/default-token-list.git"
+  },
+  "scripts": {
+    "build": "rimraf build && mkdir -p build && node src/write.js > build/uniswap-default.tokenlist.json",
+    "prepublishOnly": "npm test && npm run build",
+    "test": "mocha"
+  },
+  "version": "1.5.0"
+}

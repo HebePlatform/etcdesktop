@@ -1,0 +1,85 @@
+{
+  "_args": [
+    [
+      "@uniswap/token-lists@1.0.0-beta.25",
+      "/Users/zhanghuasheng/Documents/hebeswap"
+    ]
+  ],
+  "_development": true,
+  "_from": "@uniswap/token-lists@1.0.0-beta.25",
+  "_id": "@uniswap/token-lists@1.0.0-beta.25",
+  "_inBundle": false,
+  "_integrity": "sha512-XemgUs8YiYP7Xci+Wb8vPSnyxV9aTO6J5XLPzhZmgDFO1RY5JMnB0As8PJFia3Pg9JSRZ7+AahzxowPYhnUVWw==",
+  "_location": "/@uniswap/token-lists",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "@uniswap/token-lists@1.0.0-beta.25",
+    "name": "@uniswap/token-lists",
+    "escapedName": "@uniswap%2ftoken-lists",
+    "scope": "@uniswap",
+    "rawSpec": "1.0.0-beta.25",
+    "saveSpec": null,
+    "fetchSpec": "1.0.0-beta.25"
+  },
+  "_requiredBy": [
+    "#DEV:/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@uniswap/token-lists/-/token-lists-1.0.0-beta.25.tgz",
+  "_spec": "1.0.0-beta.25",
+  "_where": "/Users/zhanghuasheng/Documents/hebeswap",
+  "author": {
+    "name": "Moody Salem"
+  },
+  "bugs": {
+    "url": "https://github.com/Uniswap/token-lists/issues"
+  },
+  "description": "📚 The Token Lists specification",
+  "devDependencies": {
+    "ajv": "^8.6.1",
+    "ajv-formats": "^2.1.0",
+    "husky": "^4.2.5",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.0.0",
+    "typescript": "^4.3.5"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "homepage": "https://github.com/Uniswap/token-lists#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/token-lists.esm.js",
+  "name": "@uniswap/token-lists",
+  "peerDependencies": {},
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "repository": {
+    "url": "git+https://github.com/Uniswap/token-lists.git",
+    "type": "git"
+  },
+  "scripts": {
+    "build": "tsdx build",
+    "lint": "tsdx lint src test",
+    "postbuild": "cp src/tokenlist.schema.json dist/tokenlist.schema.json",
+    "prepublishOnly": "yarn test && yarn build",
+    "start": "tsdx watch",
+    "test": "tsdx test"
+  },
+  "typings": "dist/index.d.ts",
+  "version": "1.0.0-beta.25"
+}

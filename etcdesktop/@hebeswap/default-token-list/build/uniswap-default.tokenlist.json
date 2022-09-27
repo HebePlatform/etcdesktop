@@ -1,0 +1,41 @@
+{
+  "name": "HebeSwap List",
+  "timestamp": "2022-05-09T00:12:46.685Z",
+  "version": {
+    "major": 1,
+    "minor": 5,
+    "patch": 0
+  },
+  "tags": {},
+  "logoURI": "https://app.hebeswap.com/logo.png",
+  "keywords": [
+    "hebeswap",
+    "default"
+  ],
+  "tokens": [
+    {
+      "name": "WETC Token",
+      "address": "0x82A618305706B14e7bcf2592D4B9324A366b6dAd",
+      "symbol": "WETC",
+      "decimals": 18,
+      "chainId": 61,
+      "logoURI": "https://hebeswap.com/assets/0x82A618305706B14e7bcf2592D4B9324A366b6dAd/logo.png"
+    },
+    {
+      "name": "HEBE Token",
+      "address": "0x88d8c3dc6b5324f34e8cf229a93e197048671abd",
+      "symbol": "HEBE",
+      "decimals": 18,
+      "chainId": 61,
+      "logoURI": "https://hebeswap.com/assets/0x88d8c3dc6b5324f34e8cf229a93e197048671abd/logo.png"
+    },
+    {
+      "name": "USDT Token",
+      "address": "0xE411107D661f722598B4956820292dc82eD1507C",
+      "symbol": "USDT",
+      "decimals": 18,
+      "chainId": 61,
+      "logoURI": "https://hebeswap.com/assets/0xE411107D661f722598B4956820292dc82eD1507C/logo.png"
+    }
+  ]
+}

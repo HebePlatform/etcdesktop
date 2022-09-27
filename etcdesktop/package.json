@@ -1,0 +1,55 @@
+{
+  "name": "Etc-Desktop",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vue-cli-service electron:serve",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "build:mac": "vue-cli-service electron:build --mac",
+    "build:win": "vue-cli-service electron:build --win",
+    "electron:build": "vue-cli-service electron:build",
+    "electron:serve": "vue-cli-service electron:serve",
+    "postinstall": "electron-builder install-app-deps",
+    "postuninstall": "electron-builder install-app-deps"
+  },
+  "main": "background.js",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "core-js": "^3.8.3",
+    "vue": "^2.6.14",
+    "vue-router": "^3.5.1",
+    "vuex": "^3.6.2"
+  },
+  "devDependencies": {
+    "@1inch/permit-signed-approvals-utils": "^1.4.7",
+    "@metamask/eth-sig-util": "^5.0.0",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-router": "~5.0.0",
+    "@vue/cli-plugin-vuex": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "bignumber.js": "^9.1.0",
+    "crypto-js": "^4.1.1",
+    "electron": "^13.6.9",
+    "electron-devtools-installer": "^3.1.0",
+    "electron-store": "^8.1.0",
+    "element-ui": "^2.15.10",
+    "eruda": "^2.5.0",
+    "ethers": "^5.7.1",
+    "jquery": "^3.6.1",
+    "less": "^4.0.0",
+    "less-loader": "^8.0.0",
+    "node-cmd": "^5.0.0",
+    "node-polyfill-webpack-plugin": "^2.0.1",
+    "unicode-confusables": "^0.1.1",
+    "vue-cli-plugin-electron-builder": "~2.1.1",
+    "vue-clipboard2": "^0.3.3",
+    "vue-template-compiler": "^2.6.14",
+    "web3": "^1.8.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

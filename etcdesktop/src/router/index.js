@@ -7,46 +7,51 @@ import token from '@/components/tokens/token'
 import tokentransfers from '@/components/tokens/transfers'
 import nft from '@/components/nfts/nft'
 import swap from '@/components/swap/swap'
+import mining from '@/components/mining/mining'
 
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-    {
-      path: '/index',
-      name: 'index',
-      component: index,
-      children: [
+    routes: [
         {
-          path: '',
-          component: panel
+            path: '/index',
+            name: 'index',
+            component: index,
+            children: [
+                {
+                    path: '',
+                    component: panel
+                },
+                {
+                    path: 'token',
+                    component: token
+                },
+                {
+                    path: 'tokentransfers',
+                    component: tokentransfers
+                },
+                {
+                    path: 'nft',
+                    component: nft
+                },
+                {
+                    path: 'swap',
+                    component: swap
+                },
+                {
+                    path: 'mining',
+                    component: mining
+                }
+            ]
         },
         {
-          path: 'token',
-          component: token
+            path: '/',
+            name: 'login',
+            component: login,
         },
         {
-          path: 'tokentransfers',
-          component: tokentransfers
-        },
-        {
-          path: 'nft',
-          component: nft
-        },
-        {
-          path: 'swap',
-          component: swap
+            path: '*',
+            redirect: '/'
         }
-      ]
-    },
-    {
-      path: '/',
-      name: 'login',
-      component: login,
-    },
-    {
-      path: '*',
-      redirect: '/'
-    }
-  ]
+    ]
 })

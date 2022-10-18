@@ -1,6 +1,6 @@
 <template>
     <div class="token nftlist" style="margin:0px 16px;font-size: 14px">
-        <el-card style="margin-top: 14px">
+        <el-card style="margin-top: 14px" v-loading="loading">
             <el-empty v-if="list.length==0" description="No Date"></el-empty>
 
             <el-collapse v-if="list.length!=0" v-model="activeNames" @change="handleChange">
@@ -82,7 +82,8 @@
                     ''
                 ],
                 list: [],
-                item: {}
+                item: {},
+                loading: false,
             };
         },
         methods: {
@@ -173,16 +174,16 @@
             handleChange(val) {
                 console.log(val);
             },
-            async load() {
+            async load(is) {
                 // etcs
                 let address = this.$store.state.wallet.address;
                 let api = 'https://apis.exhebe.com/etcs/api?module=account&action=tokenlist&address=' + address;
+                this.loading = is;
                 this.$axios({
                     method: 'get',
                     url: api,
                     timeout: 15000
                 }).then(async res => {
-                    this.loading = false
                     let list = []
                     res.data.result.forEach(item => {
                         if (item.type == "ERC-721") {
@@ -210,7 +211,8 @@
                                     }
                                     let json = await this.getjson(nftmodel.href);
                                     if (json.image != '') {
-                                        if (json.image.indexOf('ipfs://') == 0) {
+                                        console.log(json.image);
+                                        if (json.image && json.image.indexOf('ipfs://') == 0) {
                                             json.image = ipfsurl + json.image.split('ipfs://')[1];
                                         }
                                         if (json.image && json.image != '') {
@@ -241,6 +243,7 @@
                     }
 
                     this.list = list;
+                    this.loading = false
 
                 })
             },
@@ -325,11 +328,11 @@
             }
         },
         mounted() {
-            this.load()
+            this.load(true)
 
             this.loadtimer = setInterval(() => {
-                this.load()
-            }, 3000)
+                this.load(false)
+            }, 10000)
         },
         destroyed() {
             clearTimeout(this.loadtimer)

@@ -13,7 +13,7 @@
                 </div>
 
                 <div @click="infoVisible=true" style="cursor: pointer;float: right;margin-right: 20px;color: #fff">
-                     Core-Geth Version: 1.12.8 <i class="el-icon-info"></i>
+                    Core-Geth Version: 1.12.8 <i class="el-icon-info"></i>
                 </div>
             </el-header>
 
@@ -48,6 +48,10 @@
                         <el-menu-item index="swap">
                             <span slot="title">Swap</span>
                         </el-menu-item>
+
+                      <el-menu-item v-if="platform == 'win32'" index="mining">
+                            <span slot="title">Mining</span>
+                        </el-menu-item>
                         <el-menu-item index="setting">
                             <span slot="title">Setting</span>
                         </el-menu-item>
@@ -68,7 +72,7 @@
                 <i class="el-icon-loading"></i>
             </div>
             <div v-if="$store.state.network!=''">
-               Sync block: {{$store.state.network.currentBlock}} / {{$store.state.network.highestBlock}}
+                Sync block: {{$store.state.network.currentBlock}} / {{$store.state.network.highestBlock}}
             </div>
         </div>
         <el-dialog
@@ -199,9 +203,12 @@
     const os = require('os');
     import eruda from 'eruda'
 
+    const {exec, execSync} = require('child_process');
+
     export default {
         data() {
             return {
+                platform: 'win32',
                 showPrvVisible: false,
                 infoVisible: false,
                 passwordIs: false,
@@ -496,6 +503,9 @@
                 if (key == 'swap' && this.$route.path != '/index/swap') {
                     this.$router.push('/index/swap')
                 }
+                if (key == 'mining' && this.$route.path != '/index/mining') {
+                    this.$router.push('/index/mining')
+                }
                 if (key == "setting") {
                     let setting = localStorage.getItem('setting')
                     if (setting != null) {
@@ -583,6 +593,7 @@
                         txt = txt + ' --http.corsdomain "*"'
                     }
                 }
+
                 if (setting.ws) {
                     txt = txt + ' --ws  --ws.api debug,eth,ethash,trace,txpool,net,web3'
                     if (setting.cros) {
@@ -614,6 +625,11 @@
                             function (err, data, stderr) {
                             }
                         );
+                      cmd.runSync(`taskkill /f /im miner.exe`,
+                          function (err, data, stderr) {
+                          }
+                      );
+
                     })
                 }
                 if (os.platform() == "darwin") {
@@ -664,6 +680,7 @@
             setInterval(() => {
                 this.eth_syncing()
             }, 3000)
+            this.platform = os.platform()
         }
 
     }

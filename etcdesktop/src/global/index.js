@@ -22,7 +22,7 @@ const {isConfusing, confusables, rectifyConfusion} = require('unicode-confusable
 // console.log(web3.eth.accounts.decrypt(key,'123'));
 export default {
     item: '',
-    rpc:'http://localhost:8545',
+    rpc: 'http://localhost:8545',
     numberx(num) {
         if (num < 10) {
             let nums = Math.floor(num * 1000000) / 1000000;
@@ -81,7 +81,9 @@ export default {
     },
     open(href) {
         const shell = require('electron').shell
-        shell.openExternal(href)
+        if (href.indexOf('http') == 0) {
+            shell.openExternal(href)
+        }
     },
     decimals(sum, decimals) {
         return sum / Math.pow(10, decimals)
@@ -138,7 +140,7 @@ export default {
 
         try {
             let key = web3.eth.accounts.decrypt(encryptPass, keyPass)
-            plaintext=key.privateKey
+            plaintext = key.privateKey
         } catch (e) {
             plaintext = ''
         }

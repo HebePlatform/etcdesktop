@@ -2169,29 +2169,7 @@
 
                         }
                     } else {
-                        let balanceOfabi = this.$web3.eth.abi.encodeFunctionCall({
-                            name: 'balanceOf',
-                            type: 'function',
-                            inputs: [{"type": "address", "name": "account"}]
-                        }, [this.$store.state.wallet.address]);
-
-                        let balance = await this.$axios({
-                            method: 'post',
-                            url: this.$g.rpc,
-                            data: {
-                                'method': 'eth_call',
-                                'params': [{
-                                    'to': addr,
-                                    'data': balanceOfabi,
-                                }, 'latest'],
-                                "id": 1,
-                                "jsonrpc": "2.0",
-                            },
-                            timeout: 15000
-                        });
-                        balance = this.$web3.eth.abi.decodeParameters(['uint256'], balance.data.result)[0]
-                        balance = Math.floor(this.$g.decimals(balance, decimals) * 10000) / 10000;
-                        resolve(balance);
+                       resolve(balance);
                     }
                 })
             },

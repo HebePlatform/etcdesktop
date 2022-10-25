@@ -1664,6 +1664,7 @@
                 this.poolLoad()
             },
             async poolLoad() {
+                console.log("poolLoad");
                 let list = []
                 let pool = []
                 let address = this.$store.state.wallet.address;
@@ -1673,6 +1674,8 @@
                     url: api,
                     timeout: 15000
                 }).then(async res => {
+                    console.log(res.data.tokens,"res.data.tokens");
+
                     let balancelist = [
                         {
                             text: 'ETC',
@@ -2151,6 +2154,8 @@
             },
             getBalance(addr, decimals, symbol) {
                 return new Promise(async (resolve, reject) => {
+                    console.log(addr, decimals);
+                    console.log(symbol);
                     if (symbol == "ETC") addr = ''
                     if (addr == '') {
                         if (this.$store.state.wallet.address != '') {
@@ -2166,10 +2171,31 @@
                             })
                         } else {
                             resolve(0);
-
                         }
                     } else {
-                       resolve(balance);
+                        let balanceOfabi = this.$web3.eth.abi.encodeFunctionCall({
+                            name: 'balanceOf',
+                            type: 'function',
+                            inputs: [{"type": "address", "name": "account"}]
+                        }, [this.$store.state.wallet.address]);
+
+                        let balance = await this.$axios({
+                            method: 'post',
+                            url: this.$g.rpc,
+                            data: {
+                                'method': 'eth_call',
+                                'params': [{
+                                    'to': addr,
+                                    'data': balanceOfabi,
+                                }, 'latest'],
+                                "id": 1,
+                                "jsonrpc": "2.0",
+                            },
+                            timeout: 15000
+                        });
+                        balance = this.$web3.eth.abi.decodeParameters(['uint256'], balance.data.result)[0]
+                        balance = Math.floor(this.$g.decimals(balance, decimals) * 10000) / 10000;
+                        resolve(balance);
                     }
                 })
             },
@@ -2290,7 +2316,7 @@
             this.load()
             this.loadtimer = setInterval(() => {
                 this.load()
-            }, 3000)
+            }, 6000)
 
             this.swapinputtimer = setInterval(() => {
                 if (this.type == 'swap') {
@@ -2300,7 +2326,7 @@
                 } else if (this.type == 'pool') {
                     this.poolLoad()
                 }
-            }, 3000)
+            }, 6000)
         },
         destroyed() {
             clearTimeout(this.loadtimer)

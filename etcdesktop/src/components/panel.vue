@@ -323,7 +323,7 @@
             }, 200)
             this.loadtimer = setInterval(() => {
                 this.load(false)
-            }, 3000)
+            }, 6000)
         },
         destroyed() {
             clearTimeout(this.loadtimer)

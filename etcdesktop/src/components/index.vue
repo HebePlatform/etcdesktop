@@ -593,7 +593,6 @@
                         txt = txt + ' --http.corsdomain "*"'
                     }
                 }
-
                 if (setting.ws) {
                     txt = txt + ' --ws  --ws.api debug,eth,ethash,trace,txpool,net,web3'
                     if (setting.cros) {
@@ -677,9 +676,10 @@
         },
         mounted() {
             this.peerrun()
+            console.log('触发，eth_syncingeth_syncingeth_syncingeth_syncing');
             setInterval(() => {
                 this.eth_syncing()
-            }, 3000)
+            }, 6000)
             this.platform = os.platform()
         }
 

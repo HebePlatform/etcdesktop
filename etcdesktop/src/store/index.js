@@ -49,8 +49,9 @@ export default new Vuex.Store({
       http:true,
       ws:false,
       cros:true,
-      ipfs:'https://classicsavages.mypinata.cloud/ipfs/',
+      ipfs:'https://ipfs.io/ipfs/',
       eruda:true,
+      nodeName:'',
       rpc:'https://etc.etcdesktop.com/'
     }
   },

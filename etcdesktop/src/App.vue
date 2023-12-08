@@ -254,7 +254,7 @@
                 :visible.sync="$store.state.settingVisible"
                 width="40%">
             <div>
-                <el-form label-width="80px" :label-position="labelPosition">
+                <el-form label-width="100px" :label-position="labelPosition">
                     <el-form-item label="SyncMode">
                         <el-select v-model="$store.state.form.syncmode" placeholder="syncmode">
                             <el-option label="Fast" value="fast"></el-option>
@@ -293,6 +293,9 @@
                     </el-form-item>
                     <el-form-item label="Ipfs">
                         <el-input v-model="$store.state.form.ipfs"></el-input>
+                    </el-form-item>
+                    <el-form-item label="NodeName">
+                        <el-input v-model="$store.state.form.nodeName"></el-input>
                     </el-form-item>
                     <el-form-item v-if="$store.state.form.syncmode=='rpc'" label="Rpc">
                         <el-input v-model="$store.state.form.rpc"></el-input>

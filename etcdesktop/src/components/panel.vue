@@ -129,7 +129,7 @@
                 // ;
                 let address = this.$store.state.wallet.address;
                 this.loading = is;
-                let api = 'https://apis.exhebe.com/etc/api/v2/address/' + address + '?page=' + this.current + '&pageSize=' + this.pagesize + '&details=txs';
+                let api = 'https://hebe.etcdesktop.com/etcblockexplorer/api/v2/address/' + address + '?page=' + this.current + '&pageSize=' + this.pagesize + '&details=txs';
                 this.$axios({
                     method: 'get',
                     url: api,

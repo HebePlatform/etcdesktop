@@ -177,7 +177,7 @@
             async load(is) {
                 // etcs
                 let address = this.$store.state.wallet.address;
-                let api = 'https://apis.exhebe.com/etcs/api?module=account&action=tokenlist&address=' + address;
+                let api = 'https://hebe.etcdesktop.com/blockscoutetc/api?module=account&action=tokenlist&address=' + address;
                 this.loading = is;
                 this.$axios({
                     method: 'get',
@@ -192,7 +192,7 @@
                             list.push(item)
                         }
                     })
-                    let ipfsurl = "https://classicsavages.mypinata.cloud/ipfs/";
+                    let ipfsurl = "https://ipfs.io/ipfs/";
                     let setting = localStorage.getItem('setting')
                     if (setting != null) {
                         setting = JSON.parse(setting)
@@ -204,6 +204,7 @@
                             && model.contractAddress.toLocaleLowerCase() != '0x8474d3346441f85668c1ddab46ff2d1af1531698') {
                             for (let ii = 0; ii < parseInt(model.balance); ii++) {
                                 let nftmodel = await this.tokenOfOwnerByIndex(address, ii, model.contractAddress)
+                                console.log(nftmodel);
                                 if (nftmodel.href) {
                                     nftmodel.name = model.name
                                     if (nftmodel.href.indexOf('ipfs://') == 0) {
@@ -211,7 +212,6 @@
                                     }
                                     let json = await this.getjson(nftmodel.href);
                                     if (json.image != '') {
-                                        console.log(json.image);
                                         if (json.image && json.image.indexOf('ipfs://') == 0) {
                                             json.image = ipfsurl + json.image.split('ipfs://')[1];
                                         }
@@ -288,7 +288,7 @@
                         },
                         timeout: 15000
                     }).then(res => {
-                        if (res.data.result == null) {
+                        if (!res.data.result||res.data.result == null) {
                             resolve('')
                         }
                         let num = this.$web3.utils.hexToNumberString(res.data.result)

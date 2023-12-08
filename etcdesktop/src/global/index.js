@@ -49,7 +49,6 @@ export default {
         if (txt.indexOf("0x65f705d3") == 0) {
             return "SwapTokensForETC";
         }
-
         if (txt.indexOf("0xe75f59dd") == 0) {
             return "RemoveLiquidity";
         }

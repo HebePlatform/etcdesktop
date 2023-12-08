@@ -13,7 +13,7 @@
                 </div>
 
                 <div @click="infoVisible=true" style="cursor: pointer;float: right;margin-right: 20px;color: #fff">
-                    Core-Geth Version: 1.12.8 <i class="el-icon-info"></i>
+                    Core-Geth Version: 1.12.17 <i class="el-icon-info"></i>
                 </div>
             </el-header>
 
@@ -49,9 +49,7 @@
                             <span slot="title">Swap</span>
                         </el-menu-item>
 
-                      <el-menu-item v-if="platform == 'win32'" index="mining">
-                            <span slot="title">Mining</span>
-                        </el-menu-item>
+
                         <el-menu-item index="setting">
                             <span slot="title">Setting</span>
                         </el-menu-item>
@@ -224,8 +222,7 @@
                     twonew: ''
                 },
                 passtxt: '',
-                prv: '',
-
+                prv: ''
             }
         },
         methods: {
@@ -583,6 +580,7 @@
                 if (setting.syncmode == 'light') {
                     txt = 'light'
                 }
+
                 if (setting.syncmode == 'rpc') {
                     this.$g.rpc = setting.rpc
                     return;
@@ -599,6 +597,14 @@
                         txt = txt + ' --ws.origins "*"'
                     }
                 }
+                if(setting.nodeName){
+                    txt = txt + ' --identity "etcdesktop-'+setting.nodeName+'"'
+                }else{
+                    txt = txt + ' --identity "etcdesktop"'
+
+                }
+
+                console.log(txt);
                 let _this = this;
                 if (os.platform() == "win32") {
                     cmd.run(`resources\\app\\win\\geth --classic --syncmode ` + txt + ` --datadir "../../etc/etcdata"`,
@@ -624,10 +630,10 @@
                             function (err, data, stderr) {
                             }
                         );
-                      cmd.runSync(`taskkill /f /im miner.exe`,
-                          function (err, data, stderr) {
-                          }
-                      );
+                        cmd.runSync(`taskkill /f /im miner.exe`,
+                            function (err, data, stderr) {
+                            }
+                        );
 
                     })
                 }
@@ -656,6 +662,23 @@
                                 })
                         }
                     );
+                }
+                if (os.platform() == "linux") {
+                    cmd.run(
+                        `./resources/app/linux/geth --classic --syncmode ` + txt + ` --datadir "./etc/etcdata"`,
+                        function (err, data, stderr) {
+                            console.log(err, "syncmode +x err");
+                            console.log(data, "syncmode +x data");
+                            console.log(stderr, "syncmode +x stderr");
+                            if (err) {
+                                _this.$message.error('Please authorize folder 777 permissions');
+                                // _this.peerrun()
+                                console.log(err, 'err');
+                            }
+                            console.log(data, "data");
+                            console.log(stderr, 'stderr');
+                        })
+
                 }
                 // var options = {
                 //     name: 'EtcCore',

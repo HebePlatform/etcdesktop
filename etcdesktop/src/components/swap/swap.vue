@@ -805,6 +805,9 @@
                 loadtimer: null,
                 swapinputtimer: null,
                 hensLoading: false,
+                router02:"0xEcBcF5C7aF4c323947CFE982940BA7c9fd207e2b",
+                factory:"0x09fafa5eecbc11C3e5d30369e51B7D9aab2f3F53",
+                wetc:"0x82A618305706B14e7bcf2592D4B9324A366b6dAd"
             };
         },
         methods: {
@@ -812,7 +815,7 @@
                 console.log(this.from);
                 console.log(this.to);
                 this.$store.state.balanceValue = ''
-                this.$store.state.dialog.to = '0xecbcf5c7af4c323947cfe982940ba7c9fd207e2b';
+                this.$store.state.dialog.to = this.router02;
                 this.$store.state.txt = 'RemoveLiquidity ';
                 this.$store.state.dialog.fromAmount = Math.floor(this.from.amount * 10000) / 10000;
                 this.$store.state.dialog.deadline = Math.floor(new Date().getTime() / 1000) + (60 * this.deadline)
@@ -824,8 +827,8 @@
                 console.log(this.$store.state.dialog, 'this.$store.state.dialog');
                 let liquidity = BigInt(this.$g.xdecimals(this.from.lpliquidity, 18));
                 let removeLiquidityETCWithPermitSupportingFeeOnTransferTokens = []
-                if (this.from.symbol == 'ETC' && this.from.address == "0x82A618305706B14e7bcf2592D4B9324A366b6dAd"
-                    || this.to.symbol == 'ETC' && this.to.address == "0x82A618305706B14e7bcf2592D4B9324A366b6dAd") {
+                if (this.from.symbol == 'ETC' && this.from.address == this.wetc
+                    || this.to.symbol == 'ETC' && this.to.address == this.wetc) {
                     let token = this.from.address;
 
                     let amountTokenDesired = Math.floor(this.from.amount * 10000) / 10000;
@@ -834,7 +837,7 @@
                     amountTokenMin = BigInt(this.$g.xdecimals(amountTokenMin, this.from.decimals));
 
                     let amountETCMin = Math.floor(this.to.amount * (1 - this.slippage) * 10000) / 10000;
-                    if (this.from.symbol == 'ETC' && this.from.address == "0x82A618305706B14e7bcf2592D4B9324A366b6dAd") {
+                    if (this.from.symbol == 'ETC' && this.from.address == this.wetc) {
                         token = this.to.address;
 
                         amountTokenDesired = Math.floor(this.to.amount * 10000) / 10000;
@@ -1178,7 +1181,7 @@
             },
             async addliquidityFn() {
                 this.$store.state.balanceValue = ''
-                this.$store.state.dialog.to = '0xecbcf5c7af4c323947cfe982940ba7c9fd207e2b';
+                this.$store.state.dialog.to = this.router02;
                 this.$store.state.dialog.amount = this.from.amount.toString();
                 this.$store.state.txt = 'AddLiquidity ';
                 this.$store.state.dialog.fromAmount = Math.floor(this.from.amount * 10000) / 10000;
@@ -1186,8 +1189,8 @@
                 this.$store.state.dialog.toAmount = Math.floor(this.to.amount * 10000) / 10000;
                 this.$store.state.dialog.fromName = this.from.symbol;
                 this.$store.state.dialog.toName = this.to.symbol;
-                if (this.from.symbol == 'ETC' && this.from.address == "0x82A618305706B14e7bcf2592D4B9324A366b6dAd"
-                    || this.to.symbol == 'ETC' && this.to.address == "0x82A618305706B14e7bcf2592D4B9324A366b6dAd") {
+                if (this.from.symbol == 'ETC' && this.from.address == this.wetc
+                    || this.to.symbol == 'ETC' && this.to.address == this.wetc) {
 
                     let token = this.from.address;
                     let amountTokenDesired = Math.floor(this.from.amount * 10000) / 10000;
@@ -1198,7 +1201,7 @@
 
                     let amountETCMin = Math.floor(this.to.amount * (1 - this.slippage) * 10000) / 10000;
 
-                    if (this.from.symbol == 'ETC' && this.from.address == "0x82A618305706B14e7bcf2592D4B9324A366b6dAd") {
+                    if (this.from.symbol == 'ETC' && this.from.address == this.wetc) {
                         token = this.to.address;
                         amountTokenDesired = Math.floor(this.to.amount * 10000) / 10000;
                         amountTokenDesired = BigInt(this.$g.xdecimals(amountTokenDesired, this.to.decimals));
@@ -1345,7 +1348,7 @@
             },
             async hebeswap() {
                 this.$store.state.balanceValue = ''
-                this.$store.state.dialog.to = '0xecbcf5c7af4c323947cfe982940ba7c9fd207e2b';
+                this.$store.state.dialog.to = this.router02;
                 this.$store.state.dialog.amount = this.from.amount;
                 this.$store.state.txt = 'Swap ';
                 this.$store.state.dialog.toAmount = Math.floor(this.to.amount * (1 - this.slippage) * 10000) / 10000;
@@ -1358,7 +1361,7 @@
                     this.to.address
                 ]
 
-                if (this.from.symbol == 'ETC' && this.from.address.toLocaleLowerCase() == "0x82A618305706B14e7bcf2592D4B9324A366b6dAd".toLocaleLowerCase()) {
+                if (this.from.symbol == 'ETC' && this.from.address.toLocaleLowerCase() == this.wetc.toLocaleLowerCase()) {
 
                     this.$store.state.dialog.data = this.$web3.eth.abi.encodeFunctionCall({
                         name: 'swapExactETCForTokens',
@@ -1384,9 +1387,9 @@
                         this.$store.state.wallet.address,
                         this.$store.state.dialog.deadline]);
 
-                    if (this.to.address.toLocaleLowerCase() == "0x82A618305706B14e7bcf2592D4B9324A366b6dAd".toLocaleLowerCase()) {
+                    if (this.to.address.toLocaleLowerCase() == this.wetc.toLocaleLowerCase()) {
                         this.$store.state.txt = 'WETC Deposit ';
-                        this.$store.state.dialog.to = '0x82A618305706B14e7bcf2592D4B9324A366b6dAd';
+                        this.$store.state.dialog.to = this.wetc;
                         this.$store.state.dialog.data = "0xd0e30db0"
                     }
 
@@ -1430,10 +1433,10 @@
                         this.$store.state.wallet.address,
                         this.$store.state.dialog.deadline]);
 
-                    if (this.from.symbol == 'WETC' && this.from.address.toLocaleLowerCase() == "0x82A618305706B14e7bcf2592D4B9324A366b6dAd".toLocaleLowerCase()) {
+                    if (this.from.symbol == 'WETC' && this.from.address.toLocaleLowerCase() == this.wetc.toLocaleLowerCase()) {
                         this.$store.state.txt = 'WETC Withdraw ';
                         this.$store.state.balanceValue = ''
-                        this.$store.state.dialog.to = '0x82A618305706B14e7bcf2592D4B9324A366b6dAd';
+                        this.$store.state.dialog.to = this.wetc;
                         let wad = BigInt(this.$g.xdecimals(this.$store.state.dialog.amount, 18))
                         this.$store.state.dialog.toAmount = this.$store.state.dialog.amount
                         this.$store.state.dialog.data = this.$web3.eth.abi.encodeFunctionCall({
@@ -1525,7 +1528,7 @@
                     if (JSON.stringify(list).toString().toLocaleLowerCase().indexOf(this.from.address.toLocaleLowerCase()) == -1) {
                         this.fromApprove = true;
                         disabledswap = true;
-                        if (this.from.symbol == "ETC" && this.from.address.toLocaleLowerCase() == "0x82A618305706B14e7bcf2592D4B9324A366b6dAd".toLocaleLowerCase()) {
+                        if (this.from.symbol == "ETC" && this.from.address.toLocaleLowerCase() == this.wetc.toLocaleLowerCase()) {
                             this.fromApprove = false
                             disabledswap = false;
 
@@ -1537,7 +1540,7 @@
                     }
                     if (JSON.stringify(list).toString().toLocaleLowerCase().indexOf(this.to.address.toLocaleLowerCase()) == -1) {
                         this.toApprove = true;
-                        if (this.to.symbol == "ETC" && this.to.address.toLocaleLowerCase() == "0x82A618305706B14e7bcf2592D4B9324A366b6dAd".toLocaleLowerCase()) {
+                        if (this.to.symbol == "ETC" && this.to.address.toLocaleLowerCase() == this.wetc.toLocaleLowerCase()) {
                             this.toApprove = false
                         }
                         if (this.type == "swap") {
@@ -1642,7 +1645,7 @@
                 this.from = {
                     "name": "ETC",
                     "symbol": "ETC",
-                    "address": "0x82A618305706B14e7bcf2592D4B9324A366b6dAd",
+                    "address": this.wetc,
                     "decimals": 18,
                     "logoURI": etclogo,
                     'sum': this.from.sum,
@@ -1668,7 +1671,7 @@
                 let list = []
                 let pool = []
                 let address = this.$store.state.wallet.address;
-                let api = 'https://apis.exhebe.com/etc/api/v2/address/' + address + '?page=' + this.current + '&pageSize=' + this.pagesize + '&details=txs';
+                let api = 'https://hebe.etcdesktop.com/etcblockexplorer/api/v2/address/' + address + '?page=' + this.current + '&pageSize=' + this.pagesize + '&details=txs';
                 this.$axios({
                     method: 'get',
                     url: api,
@@ -1716,10 +1719,10 @@
                             if (contract.toLowerCase() == item.contract.toLowerCase()) {
                                 let total = await this.totalSupply(item)
                                 item.alllp = Math.floor(this.$g.decimals(total, 18) * 10000) / 10000;
-                                if (item.tokens[0].contract.toLowerCase() == "0x82A618305706B14e7bcf2592D4B9324A366b6dAd".toLowerCase()) {
+                                if (item.tokens[0].contract.toLowerCase() == this.wetc.toLowerCase()) {
                                     item.tokens[0].symbol = "ETC"
                                 }
-                                if (item.tokens[1].contract.toLowerCase() == "0x82A618305706B14e7bcf2592D4B9324A366b6dAd".toLowerCase()) {
+                                if (item.tokens[1].contract.toLowerCase() == this.wetc.toLowerCase()) {
                                     item.tokens[1].symbol = "ETC"
                                 }
                                 item.tokenA = {
@@ -1793,7 +1796,7 @@
                             data: {
                                 'method': 'eth_call',
                                 'params': [{
-                                    'to': "0x09fafa5eecbc11C3e5d30369e51B7D9aab2f3F53",
+                                    'to': this.factory,
                                     'data': getPairabi,
                                 }, 'latest'],
                                 "id": 1,
@@ -1811,7 +1814,7 @@
             },
             async tokenBalances(item) {
                 return new Promise(async (resolve, reject) => {
-                    let api = 'https://apis.exhebe.com/etc/api/v2/address/' + item.contract + '?page=1&pageSize=1&details=tokenBalances';
+                    let api = 'https://hebe.etcdesktop.com/etcblockexplorer/api/v2/address/' + item.contract + '?page=1&pageSize=1&details=tokenBalances';
                     this.$axios({
                         method: 'get',
                         url: api,
@@ -1848,7 +1851,7 @@
 
                 if (this.from.name != '' && this.to.name != '' && this.to.address != this.from.address) {
                     if (type == 'from') {
-                        if (this.from.address.toLocaleLowerCase() == "0x82A618305706B14e7bcf2592D4B9324A366b6dAd".toLocaleLowerCase() && this.to.address.toLocaleLowerCase() == "0x82A618305706B14e7bcf2592D4B9324A366b6dAd".toLocaleLowerCase()) {
+                        if (this.from.address.toLocaleLowerCase() == this.wetc.toLocaleLowerCase() && this.to.address.toLocaleLowerCase() == "0x82A618305706B14e7bcf2592D4B9324A366b6dAd".toLocaleLowerCase()) {
                             this.to.amount = this.from.amount
                         } else {
                             let amount = await this.fromforto()
@@ -1865,9 +1868,9 @@
                         this.from = JSON.parse(JSON.stringify(this.from))
                     }
                     this.ratemodel = 0
-                    if (this.to.address.toLocaleLowerCase() != "0x82A618305706B14e7bcf2592D4B9324A366b6dAd".toLocaleLowerCase()
+                    if (this.to.address.toLocaleLowerCase() != this.wetc.toLocaleLowerCase()
                         ||
-                        this.from.address.toLocaleLowerCase() != "0x82A618305706B14e7bcf2592D4B9324A366b6dAd".toLocaleLowerCase()) {
+                        this.from.address.toLocaleLowerCase() != this.wetc.toLocaleLowerCase()) {
                         this.rate()
                     }
                     price = Math.floor(this.from.amount / this.to.amount * 1000000) / 1000000;
@@ -1898,9 +1901,9 @@
                     return 0;
                 }
                 let fromAddress = this.from.address
-                if (fromAddress == '') fromAddress = '0x82A618305706B14e7bcf2592D4B9324A366b6dAd'
+                if (fromAddress == '') fromAddress = this.wetc
                 let toAddress = this.to.address
-                if (toAddress == '') toAddress = '0x82A618305706B14e7bcf2592D4B9324A366b6dAd'
+                if (toAddress == '') toAddress = this.wetc
                 let from = new hebeswap_sdk.Token(61, toAddress, this.to.decimals,
                     this.to.name, this.to.symbol)
                 let to = new hebeswap_sdk.Token(61, fromAddress, this.from.decimals,
@@ -1921,9 +1924,9 @@
                     return 0;
                 }
                 let fromAddress = this.from.address
-                if (fromAddress == '') fromAddress = '0x82A618305706B14e7bcf2592D4B9324A366b6dAd'
+                if (fromAddress == '') fromAddress = this.wetc
                 let toAddress = this.to.address
-                if (toAddress == '') toAddress = '0x82A618305706B14e7bcf2592D4B9324A366b6dAd'
+                if (toAddress == '') toAddress = this.wetc
                 let from = new hebeswap_sdk.Token(61, toAddress, this.to.decimals,
                     this.to.name, this.to.symbol)
                 let to = new hebeswap_sdk.Token(61, fromAddress, this.from.decimals,
@@ -1943,9 +1946,9 @@
                             return 0;
                         }
                         let fromAddress = this.from.address
-                        if (fromAddress == '') fromAddress = '0x82A618305706B14e7bcf2592D4B9324A366b6dAd'
+                        if (fromAddress == '') fromAddress = this.wetc
                         let toAddress = this.to.address
-                        if (toAddress == '') toAddress = '0x82A618305706B14e7bcf2592D4B9324A366b6dAd'
+                        if (toAddress == '') toAddress = this.wetc
                         let from = new hebeswap_sdk.Token(61, fromAddress, this.from.decimals,
                             this.from.name, this.from.symbol)
                         let to = new hebeswap_sdk.Token(61, toAddress, this.to.decimals,
@@ -2086,10 +2089,10 @@
                         let model = {
                             tokens: [
                                 {
-                                    contract: this.from.address == '' ? "0x82A618305706B14e7bcf2592D4B9324A366b6dAd" : this.from.address
+                                    contract: this.from.address == '' ? this.wetc : this.from.address
                                 },
                                 {
-                                    contract: this.to.address == '' ? "0x82A618305706B14e7bcf2592D4B9324A366b6dAd" : this.to.address
+                                    contract: this.to.address == '' ? this.wetc : this.to.address
                                 }
                             ]
                         };
@@ -2144,7 +2147,7 @@
                     this.model = res.data;
                     this.model.tokens.unshift({
                         "name": "ETC Token",
-                        "address": "0x82a618305706b14e7bcf2592d4b9324a366b6dad",
+                        "address": this.wetc,
                         "symbol": "ETC",
                         "decimals": 18,
                         "chainId": 61,
